@@ -1,12 +1,20 @@
 type DieProps = {
-  value: number;
+  die: {
+    id: string;
+    value: number;
+    isSelected: boolean;
+  };
+  handleDice: () => void;
 };
 
-const Die = ({ value }: DieProps) => {
+const Die = ({ die: { value, isSelected }, handleDice }: DieProps) => {
   return (
-    <div className="w-full aspect-square flex items-center justify-center bg-white font-semibold text-xl cursor-pointer rounded">
+    <button
+      onClick={handleDice}
+      className={`w-full aspect-square flex items-center justify-center ${isSelected ? "bg-green-300" : "bg-white"} font-semibold text-xl cursor-pointer rounded`}
+    >
       {value}
-    </div>
+    </button>
   );
 };
 

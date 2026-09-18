@@ -1,7 +1,27 @@
+import { useState } from "react";
 import Die from "./Die";
 
 const Dice = () => {
-  const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  function allNewDice(num: number) {
+    return new Array(num).fill(1).map(() => {
+      return {
+        id: crypto.randomUUID(),
+        value: Math.floor(Math.random() * 10 + 1),
+        isSelected: false,
+      };
+    });
+  }
+  const [dice, setDice] = useState(() => allNewDice(10));
+
+  const handleDice = (id: string) =>
+    setDice((prev) => {
+      return prev.map((die) => {
+        if (die.id === id) {
+          return { ...die, isSelected: !die.isSelected };
+        }
+        return die;
+      });
+    });
   return (
     <div className="text-center flex flex-col items-center gap-3">
       <h1>Tenzies</h1>
@@ -10,8 +30,10 @@ const Dice = () => {
         current value between rolls.
       </p>
       <div className="grid mt-3 grid-cols-5 gap-5 w-full max-w-md">
-        {nums.map((n) => {
-          return <Die value={n} />;
+        {dice.map((die) => {
+          return (
+            <Die die={die} key={die.id} handleDice={() => handleDice(die.id)} />
+          );
         })}
       </div>
       <button className="mt-3">Roll</button>
