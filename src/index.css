@@ -1,1 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+}
+@layer base {
+  body {
+    @apply bg-[#0B2434] font-roboto;
+  }
+  h1 {
+    @apply text-4xl font-bold;
+  }
+  p {
+    @apply leading-5 selection:bg-black selection:text-white max-w-md text-sm sm:text-base;
+  }
+  button {
+    @apply w-full max-w-30 rounded border-2 border-slate-800 px-6 py-2 font-bold text-slate-800 transition hover:bg-slate-800 hover:text-white;
+  }
+}
+
+@utility flex-center {
+  @apply flex justify-center items-center;
+}
