@@ -22,6 +22,21 @@ const Dice = () => {
         return die;
       });
     });
+
+  const handleRoll = () =>
+    setDice((prev) => {
+      return prev.map((die) => {
+        if (die.isSelected === false) {
+          return {
+            id: crypto.randomUUID(),
+            value: Math.floor(Math.random() * 10 + 1),
+            isSelected: false,
+          };
+        }
+        return die;
+      });
+    });
+
   return (
     <div className="text-center flex flex-col items-center gap-3">
       <h1>Tenzies</h1>
@@ -36,7 +51,9 @@ const Dice = () => {
           );
         })}
       </div>
-      <button className="mt-3">Roll</button>
+      <button onClick={handleRoll} className="mt-3">
+        Roll
+      </button>
     </div>
   );
 };
